@@ -1,0 +1,96 @@
+<html>
+<head>
+    <title>Register</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            // function to show visit time by dentist
+            $("#dentists").change(function () {
+                var dentistId = $(this).val();
+                var options = document.getElementById('visits');
+                var i, L = options.options.length - 1;
+                for (i = L; i >= 0; i--) {
+                    options.remove(i);
+                }
+                const message = "noVisits";
+                [[${visitsWithoutPatient}]].forEach(function (visit) {
+                    if (visit.dentistId === parseInt(dentistId, 10)) {
+                        ($("#visits").append("<option th:value='${" + visit.id + "}'>" + visit.dentistName + " - " + visit.time + "</option>"));
+                    }
+                });
+                if ($("#visits")[0].childElementCount > 0) {
+                    document.getElementById('regButton').hidden = false;
+                } else {
+                    document.getElementById('regButton').hidden = true;
+                }
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link href="../static/form.css" th:href="@{/form.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<div class="main">
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+<!--                    form to register on visit-->
+                    <form action="#" th:action="@{/}" th:object="${updateDentistVisitDTO}" th:method="post">
+                        <input type="hidden" name="m" th:value="update"/>
+                        <table>
+                            <tr>
+                                <td><label for="name">Nimi:</label></td>
+                                <td><input id="name" th:field="*{patientName}" th:placeholder="#{patient.name}"/></td>
+                                <td th:if="${#fields.hasErrors('patientName')}" th:errors="*{patientName}">name.error
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="dentists">Vali hambaarst:</label></td>
+                                <td>
+                                    <select id="dentists">
+                                        <option th:selected="true" th:disabled="disabled"
+                                                th:text="#{choose.dentist}"></option>
+                                        <option th:each="dentist : ${dentistList}" th:value="${dentist.id}"
+                                                th:text="${dentist.firstname} + ' ' + ${dentist.lastname}"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><label for="visits">Vali aeg:</label></td>
+                                <td>
+                                    <select id="visits" th:field="*{id}">
+                                        <option selected="true" th:value="null" th:disabled="disabled"
+                                                th:text="#{no.dentist}"></option>
+                                    </select>
+                                </td>
+                                <td th:if="${#fields.hasErrors('id')}" th:errors="*{id}">name.error</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button type="submit" hidden="hidden" id="regButton"
+                                            th:text="#{register.visit}"></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
+                    <!--                    moving pages buttons-->
+                    <form th:action="@{/}" th:method="get">
+                        <input type="hidden" name="m" th:value="table"/>
+                        <button type="submit" th:text="#{show.table}"></button>
+                    </form>
+                    <form th:action="@{/}" th:method="get">
+                        <input type="hidden" name="m" th:value="settings"/>
+                        <button type="submit" th:text="#{visit.settings}"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

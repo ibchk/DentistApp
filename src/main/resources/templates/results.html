@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>Form sent</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link href="../static/form.css" th:href="@{/form.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="main">
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <p th:text="#{registration.ok}">registration.ok</p>
+                    <button type="button" th:onclick="|window.location.href='/'|" th:text="#{show.form}"></button>
+                    <form th:action="@{/}" th:method="get">
+                        <input type="hidden" name="m" th:value="table"/>
+                        <button type="submit" th:text="#{show.table}"></button>
+                    </form>
+                </div>
+                <div class="col-sm">
+                    <img src="https://i.pinimg.com/originals/3f/6b/61/3f6b6126853d2de4cf789667b72b5070.gif"  alt="minionsGif"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

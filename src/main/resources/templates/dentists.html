@@ -1,0 +1,37 @@
+<html lang="en">
+<head>
+    <title>Dentists</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link href="../static/table.css" th:href="@{/table.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="main">
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <table class="forms-table">
+                        <thead>
+                        <tr>
+                            <th th:text="#{dentist.firstname}"></th>
+                            <th th:text="#{dentist.lastname}"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="dentist : ${dentistList}">
+                            <td th:text="${dentist.firstname}"></td>
+                            <td th:text="${dentist.lastname}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <form th:action="@{/}" th:method="get">
+                        <input type="hidden" name="m" th:value="settings"/>
+                        <button type="submit" th:text="#{visit.settings}"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

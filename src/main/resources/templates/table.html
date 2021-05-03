@@ -1,0 +1,92 @@
+<html>
+<head>
+    <title>Table</title>
+    <script type="text/javascript">
+
+        //function to show change name field
+        function changeRow(id) {
+            console.log(id);
+            console.log(document.getElementById('showVisitChangeFields' + id))
+            console.log()
+            document.getElementById('showVisitChangeFields' + id).style.visibility = "hidden";
+            document.getElementById('name' + id).style.visibility = "visible";
+            document.getElementById('changeButton' + id).style.visibility = "visible";
+        }
+    </script>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link href="../static/table.css" th:href="@{/table.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="main">
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <table class="forms-table">
+                        <thead>
+                        <tr>
+                            <th th:text="#{number}"></th>
+                            <th th:text="#{dentist.name}"></th>
+                            <th th:text="#{visit.time}"></th>
+                            <th th:text="#{patient.name}"></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="visit : ${visits}">
+
+                            <td th:text="${visit.orderNr}"></td>
+                            <td th:text="${visit.dentistName}"></td>
+                            <td th:text="${visit.time}"></td>
+                            <td th:text="${visit.patientName}"></td>
+
+<!--                         delete button-->
+                            <td>
+                                <form th:action="@{/}" th:method="post">
+                                    <input type="hidden" name="id" th:value="${visit.id}"/>
+                                    <button type="submit" th:text="#{delete.visit}"></button>
+                                </form>
+                            </td>
+
+<!--                         change button to show change field   -->
+                            <td>
+                                <button style="visibility:visible"  th:id="'showVisitChangeFields' + ${visit.id}" type="submit" th:attr="onclick=|changeRow(${visit.id})|"
+                                        th:text="#{change.visit}"></button>
+                            </td>
+
+<!--                         change name field and submit button  -->
+                            <td>
+                                <form th:action="@{/}" th:method="post" th:object="${updateDentistVisitDTO}">
+
+                                    <input type="hidden" name="m" th:value="change"/>
+                                    <label>
+                                        <input type="hidden" th:name="id" th:value="${visit.id}"/>
+                                    </label>
+                                    <label>
+                                        <input style="visibility:hidden" th:id="'name' + ${visit.id}"  th:field="*{patientName}" th:placeholder="#{patient.name}"/>
+                                    </label>
+                                    <button type="submit" style="visibility:hidden" th:id="'changeButton' + ${visit.id}" th:text="#{change.visit.ok}"></button>
+                                    <label th:if="${#fields.hasErrors('patientName')}" th:errors="*{patientName}">name.error</label>
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+<!--                    moving pages buttons-->
+                    <form th:action="@{/}" th:method="get">
+                        <button type="submit" th:text="#{show.form}"></button>
+                    </form>
+                    <form th:action="@{/}" th:method="delete">
+                        <button type="submit" th:text="#{clear.table}"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Settings</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link href="../static/form.css" th:href="@{/form.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="main">
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+
+
+                    <p>Hambaarsti lisamine</p>
+                    <form action="#" th:action="@{/dentist/}" th:object="${dentistDTO}" th:method="post">
+                        <table>
+                            <tr>
+                                <td><p th:text="#{dentist.firstname}">dentist.firstname</p></td>
+                                <td><input type="text" th:field="*{firstname}"/></td>
+                                <td th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}">name.error</td>
+                            </tr>
+                            <tr>
+                                <td><p th:text="#{dentist.lastname}">dentist.lastname</p></td>
+                                <td><input type="text" th:field="*{lastname}"/></td>
+                                <td th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">lastname.error</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button type="submit" th:text="#{register.dentist}"></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+                <div class="col-sm">
+
+
+                    <p>Uue visiidi aja lisamine</p>
+                    <form th:action="@{/}" th:object="${registerVisitDTO}" th:method="post">
+                        <input type="hidden" name="m" th:value="visit"/>
+                        <table>
+                            <tr>
+                                <td><p th:text="#{choose.dentist}">choose.dentist</p></td>
+                                <td>
+                                    <select name="dentists" id="dentists" th:field="*{dentistId}">
+                                        <option th:each="dentist : ${dentistList}" th:value="${dentist.id}" th:text="${dentist.firstname} + ' ' + ${dentist.lastname}"></option>
+                                    </select>
+                                </td>
+                                <td th:if="${#fields.hasErrors('dentistId')}" th:errors="*{dentistId}">date.error</td>
+                            </tr>
+                            <tr>
+                                <td><p th:text="#{visit.date}">visit.date</p></td>
+                                <td><input type="date" id="dateField" th:field="*{date}"/></td>
+                                <td th:if="${#fields.hasErrors('date')}" th:errors="*{date}">date.error</td>
+                            </tr>
+                            <tr>
+                                <td><p th:text="#{visit.start.time}">visit.start.time</p></td>
+                                <td><input type="time" id="timeStartField" th:field="*{startTime}"/></td>
+                                <td th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}">time.error</td>
+                            </tr>
+                            <tr>
+                                <td><p th:text="#{visit.end.time}">visit.end.time</p></td>
+                                <td><input type="time" id="timeEndField" th:field="*{endTime}"/></td>
+                                <td th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}">time.error</td>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button type="submit" th:text="#{add.free.visit}"></button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <!--                    moving pages buttons-->
+            <div class="row">
+                <div class="col-sm">
+                    <form th:action="@{/dentist/}" th:method="get">
+                        <input type="hidden" name="m" th:value="table"/>
+                        <button type="submit" th:text="#{show.dentists}"></button>
+                    </form>
+                    <form th:action="@{/}" th:method="get">
+                        <input type="hidden" name="m" th:value="table"/>
+                        <button type="submit" th:text="#{show.table}"></button>
+                    </form>
+                    <button type="button" th:onclick="|window.location.href='/'|" th:text="#{show.form}"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

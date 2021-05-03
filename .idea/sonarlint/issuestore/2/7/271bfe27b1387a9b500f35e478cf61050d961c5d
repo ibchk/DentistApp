@@ -1,0 +1,18 @@
+
+N	java:S106B"9Replace this use of System.out or System.err by a logger.(ì’Ôö
+S	java:S106"9Replace this use of System.out or System.err by a logger.(áÖßûÿÿÿÿ
+N	java:S106;"9Replace this use of System.out or System.err by a logger.(ÚÍÀ°
+N	java:S106 "9Replace this use of System.out or System.err by a logger.(£·®
+N	java:S106I"9Replace this use of System.out or System.err by a logger.(Œ‹òÑ
+S	java:S1067"9Replace this use of System.out or System.err by a logger.(õÃµ°şÿÿÿÿ
+N	java:S106?"9Replace this use of System.out or System.err by a logger.(‹®œù
+d
+java:S1192#"IDefine a constant instead of duplicating this literal "dentists" 4 times.(¤’Úşÿÿÿÿ
+N	java:S106*"9Replace this use of System.out or System.err by a logger.(ğ¥‚Ú
+S	java:S1062"9Replace this use of System.out or System.err by a logger.(áÖßûÿÿÿÿ
+a
+java:S1192""FDefine a constant instead of duplicating this literal "table" 5 times.(Û¨ÿàûÿÿÿÿ
+S	java:S106$"9Replace this use of System.out or System.err by a logger.(ìÒ‡Ôûÿÿÿÿ
+S	java:S1063"9Replace this use of System.out or System.err by a logger.(ş›Á¸ùÿÿÿÿ
+N	java:S1064"9Replace this use of System.out or System.err by a logger.(ö¡¹ê
+N	java:S1065"9Replace this use of System.out or System.err by a logger.(£·®
